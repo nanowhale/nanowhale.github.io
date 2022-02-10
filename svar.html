@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svar på invitasjon &#10084; Melissa & Halvor &#10084; 2022-05-28</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  </head>
+
+  <body>
+
+    <header>
+      <a href="/" title="Melissa & Halvor. Bryllup 28. mai 2022"><img width="100%" src="mogh_banner.900x312.png" alt="Melissa & Halvors bryllup 28. mai 2022"></a>
+    </header>
+
+    <nav>
+      <a href="/">Forside</a>
+      <a href="/svar" class="current">Svar på invitasjon</a>
+      <a href="/reiseogovernatting">Reise og overnatting</a>
+      <a href="/tidsplan">Tidsplan</a>
+      <a href="/onskeliste">Ønskeliste</a>
+    </nav>
+
+    <article>
+      <h2>Svar på invitasjon</h2>
+
+      <form method="POST" action="https://script.google.com/macros/s/AKfycbz-R2_ccMCGSLDfIxHC0HhWp-HyOCdP6s5fmq7I2VnDaVGeC7nSVDdgB0gDE0hjKY0ZYQ/exec" id="rsvp">
+        <label>Ja, følgende gjester ønsker å komme i bryllupet: *<br>
+          <input id="gjester" name="Gjester" type="text" maxlength="100" placeholder="Navnene dere (som på invitasjonen)" required>
+        </label><br><br>
+
+        <label>Mailadresse *<br>
+          <input id="email" name="Email" type="email" maxlength="100" placeholder="eksempel@eksempel.no (flere adresser kan adskilles med ';' )" required>
+        </label><br><br>
+
+        <label>Hvilke dager vil du vi skal reservere overnatting og frokost til deg/dere? * <br>
+          <i>Det koster 510 kr per person, per natt, inkl. frokost - les mer om alternativer <a title="Reise og overnatting"href="reiseogovernatting">her</a>.</i><br>
+          <input type="radio" id="overnatning-fredag-lordag-sondag" name="Overnatning" value="fredag-lørdag-søndag" required>
+          <label for="overnatning-fredag-lordag-sondag">2 netter, fredag-søndag</label>
+          <br>
+          <input type="radio" id="overnatning-fredag-lordag" name="Overnatning" value="fredag-lørdag" required>
+          <label for="overnatning-fredag-lordag">1 nat, fredag-lørdag</label>
+          <br>
+          <input type="radio" id="overnatning-lordag-sondag" name="Overnatning" value="lørdag-søndag" required>
+          <label for="overnatning-lordag-sondag">1 nat, lørdag-søndag</label>
+          <br>
+          <input type="radio" id="overnatning-nej" name="Overnatning" value="nej" required>
+          <label for="overnatning-nej">0 netter</label>
+        </label><br><br>
+
+        <label>Madpreferencer eller allergi?<br>
+          <textarea id="mad" name="Mad" maxlength="1000" placeholder="Madpreferencer, allergi, eller annet kokken bør vite."></textarea>
+        </label><br><br>
+
+        <label>Kommentar eller spørsmål?<br>
+          <textarea id="kommentar" name="Kommentar" maxlength="1000" placeholder="Kommentarer, spørsmål, spesielle hensyn, eller annet vi bør vite."></textarea>
+        </label><br><br>
+        
+        <label>Nevn en sang som du liker å danse til (sangen legges til spilleliste under bryllupsfesten) *<br>
+          <input id="sang" name="Sang" type="text" maxlength="300" placeholder='Eksempel: "A-ha: Take on Me"' required>
+        </label><br><br>
+
+        <label class="right">
+            <span id="progress_desc"></span>
+            <svg display="none" id="progress_icon" version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              width="25px" height="25px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                <animateTransform attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="1s"
+                  repeatCount="indefinite"/>
+              </path>
+            </svg>
+          <button id="submit" type="submit">Send svar</button>
+          </label>
+
+        <p><i>* Obligatoriske felter.</i></p>
+        <p>For å endre svaret må du <a href="">oppdater siden</a>, fyll ut og send inn skjemaet på nytt.
+          <a class="no-deco" href="https://docs.google.com/spreadsheets/d/1HnDOThKSWQJSEAWGzCRURoTmprHtkC6C9tX4BR5oD6w/edit#gid=0" target="_blank" title="Se alle svar (pålogging kreves)"> &nbsp; </a>
+        </p>
+
+        <script>
+        window.addEventListener("load", function() {
+          const form = document.getElementById('rsvp');
+          const progress_icon = document.getElementById("progress_icon")
+          const progress_desc = document.getElementById("progress_desc")
+
+          form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const data = new FormData(form);
+            const action = e.target.action;
+            var elements = form.elements;
+            var err = false;
+            for (var i = 0, len = elements.length; i < len; ++i) {
+              elements[i].readOnly = true;
+              elements[i].disabled = true;
+            }
+            progress_icon.style.display = "inline";
+            fetch(action, {
+              method: 'POST',
+              body: data,
+            })
+            .then(response => {
+              console.log(response);
+              progress_icon.style.display = "none";
+              if (response.ok) {
+                progress_desc.innerText = "Svar er mottatt. Takk!";
+              }
+            });
+          });
+        });
+        </script>
+      </form>
+
+    </article>
+
+    <!-- <footer>
+      <p>Fejl på siden? Skriv til <a href="mailto:martin.sand.halle+webmaster@gmail.com?subject=[melissaoghalvor.no] ">vores webmaster.</a></p>
+    </footer> -->
+
+  </body>
+</html>
